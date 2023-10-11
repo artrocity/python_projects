@@ -1,0 +1,43 @@
+#Import Clear and Logo
+from replit import clear
+from art import logo
+
+def main():
+	#Print Logo
+	print(logo)
+	print("Welcome to the secret auction bid")
+	calculate_highest_bid(obtain_bid())
+
+#Function to ask users for the bid and return all bids in a dictionary
+def obtain_bid():
+	auction_bids = {}
+	while True:
+		name = input("What is your name: ").strip()
+		while True:
+			try:
+				bid = int(input("What's your bid? $"))
+				break
+			except ValueError as e:
+				print("Erro: Please use numbers only", str(e))
+				continue
+		auction_bids[name] = bid
+		more_bidders = input("Are there any other biders? Type 'yes' or 'no': ").lower()
+		if more_bidders == "yes":
+			clear()
+		elif more_bidders == "no":
+			break
+		else:
+			continue
+	return auction_bids
+	
+#Takes a dictionary as a parameter and determines winner using max function
+def calculate_highest_bid(dict):
+	entry_bids = dict
+	max_value = max(entry_bids.values())
+	max_key = max(entry_bids, key=entry_bids.get)
+	print(f"The winner is {max_key} with a bid of ${max_value}.")
+
+
+if __name__ == "__main__":
+	main()
+	
